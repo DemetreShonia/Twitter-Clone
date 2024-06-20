@@ -19,8 +19,9 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
   }
 
   @override
@@ -30,7 +31,7 @@ class _LoginViewState extends State<LoginView> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
                 AuthField(
