@@ -1,12 +1,23 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:twitter_clone/core/core.dart';
+import 'package:twitter_clone/core/providers.dart';
 
 abstract class IAuthApi {
   FutureEither<User> signUp(
       {required String email, required String password, required String name});
 }
+
+// provider provides read only value
+// there are other type of Providers too
+// state provider and state notifier provider gives ability to
+// read and write
+final authAPIProvider = Provider((ref) {
+  Account account = ref.watch(appwriteAccountProvider);
+  return AuthApi(account: account);
+});
 
 class AuthApi implements IAuthApi {
   final Account _account;
