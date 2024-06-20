@@ -1,24 +1,25 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:twitter_clone/common/common.dart';
-import 'package:twitter_clone/features/auth/view/signup_view.dart';
+import 'package:twitter_clone/constants/constants.dart';
+import 'package:twitter_clone/features/auth/view/login_view.dart';
 import 'package:twitter_clone/features/auth/widgets/auth_field.dart';
 import 'package:twitter_clone/theme/pallete.dart';
-import 'package:twitter_clone/constants/constants.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class SignUpView extends StatefulWidget {
   static route() {
     return MaterialPageRoute(
-      builder: (context) => const LoginView(),
+      builder: (context) => const SignUpView(),
     );
   }
 
+  const SignUpView({super.key});
+
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignUpViewState extends State<SignUpView> {
   final appbar = UIConstants.appBar();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -55,18 +56,18 @@ class _LoginViewState extends State<LoginView> {
                 const SizedBox(height: 40),
                 RichText(
                     text: TextSpan(
-                        text: "Don't have an account?",
+                        text: "Already have an account?",
                         style: const TextStyle(fontSize: 16),
                         children: [
                       TextSpan(
-                          text: " Sign Up",
+                          text: " Log In",
                           style: const TextStyle(
                               color: Pallete.blueColor, fontSize: 16),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.push(
                                 context,
-                                SignUpView.route(),
+                                LoginView.route(),
                               );
                             })
                     ])),
@@ -78,7 +79,3 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
-
-
-
-// 55:11
