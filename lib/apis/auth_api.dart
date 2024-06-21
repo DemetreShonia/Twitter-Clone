@@ -12,6 +12,8 @@ abstract class IAuthApi {
   });
   FutureEither<Session> logIn(
       {required String email, required String password});
+
+  Future<User?> currentUserAccount();
 }
 
 // provider provides read only value
@@ -26,6 +28,18 @@ final authAPIProvider = Provider((ref) {
 class AuthApi implements IAuthApi {
   final Account _account;
   AuthApi({required account}) : _account = account;
+
+  // future provider will solve errors for us, not use future either
+  @override
+  Future<User?> currentUserAccount() async {
+    try {
+      return await _account.get();
+    } on AppwriteException catch (e) {
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
 
   @override
   FutureEither<User> signUp({
