@@ -35,7 +35,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
   }
 
   void onSignUp() {
-    final res = ref.read(authControllerProvider.notifier).signUp(
+    ref.read(authControllerProvider.notifier).signUp(
         email: emailController.text,
         password: passwordController.text,
         context: context);

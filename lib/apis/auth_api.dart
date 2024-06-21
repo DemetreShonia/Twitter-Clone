@@ -6,8 +6,12 @@ import 'package:twitter_clone/core/core.dart';
 import 'package:twitter_clone/core/providers.dart';
 
 abstract class IAuthApi {
-  FutureEither<User> signUp(
-      {required String email, required String password, required String name});
+  FutureEither<User> signUp({
+    required String email,
+    required String password,
+  });
+  FutureEither<Session> logIn(
+      {required String email, required String password});
 }
 
 // provider provides read only value
@@ -24,16 +28,39 @@ class AuthApi implements IAuthApi {
   AuthApi({required account}) : _account = account;
 
   @override
-  FutureEither<User> signUp(
-      {required String email,
-      required String password,
-      required String name}) async {
+  FutureEither<User> signUp({
+    required String email,
+    required String password,
+  }) async {
     try {
       // appwrite will generate unique id "unique()"
       final account = await _account.create(
           userId: ID.unique(), email: email, password: password);
 
       return right(account); // Either's right, so success
+    } on AppwriteException catch (e, stacktrace) {
+      // either's left, so failure
+      return left(
+          Failure(e.message ?? "Some unexpected error occured", stacktrace));
+    } catch (e, stacktrace) {
+      // either's left, so failure
+      return left(Failure(e.toString(), stacktrace));
+    }
+  }
+
+  @override
+  FutureEither<Session> logIn({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      // appwrite will generate unique id "unique()"
+      final session = await _account.createEmailPasswordSession(
+        email: email,
+        password: password,
+      );
+
+      return right(session); // Either's right, so success
     } on AppwriteException catch (e, stacktrace) {
       // either's left, so failure
       return left(

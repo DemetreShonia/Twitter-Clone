@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone/apis/auth_api.dart';
 import 'package:twitter_clone/core/utils.dart';
 
-// 1:35:00
-
 final authControllerProvider =
     StateNotifierProvider<AuthController, bool>((ref) {
   return AuthController(authApi: ref.watch(authAPIProvider));
@@ -27,9 +25,18 @@ class AuthController extends StateNotifier<bool> {
       required BuildContext context}) async {
     // we want to use snackbar in case of error, so use context here too to be able to do that
     state = true;
-    final res = await _authApi.signUp(
-        email: email, password: password, name: "Demetre");
+    final res = await _authApi.signUp(email: email, password: password);
     state = false;
     res.fold((l) => showSnackBar(context, l.message), (r) => print(r.email));
+  }
+
+  void logIn(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    state = true;
+    final res = await _authApi.logIn(email: email, password: password);
+    state = false;
+    res.fold((l) => showSnackBar(context, l.message), (r) => print(r.userId));
   }
 }
