@@ -15,19 +15,22 @@ class RoundedSmallButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
-      label: Text(
-        label,
-        style: TextStyle(color: textColor, fontSize: 16),
+    return InkWell(
+      onTap: onTap,
+      child: Chip(
+        label: Text(
+          label,
+          style: TextStyle(color: textColor, fontSize: 16),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(
+              color: Colors
+                  .transparent), // Optional: You can add a border if needed
+        ),
+        backgroundColor: backgroundColor,
+        labelPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-        side: const BorderSide(
-            color:
-                Colors.transparent), // Optional: You can add a border if needed
-      ),
-      backgroundColor: backgroundColor,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
     );
   }
 }
