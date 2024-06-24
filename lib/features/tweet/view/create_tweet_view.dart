@@ -1,8 +1,13 @@
+import "dart:io";
+
+import "package:carousel_slider/carousel_slider.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:image_picker/image_picker.dart";
 import "package:twitter_clone/common/common.dart";
 import "package:twitter_clone/constants/assets_constants.dart";
+import "package:twitter_clone/core/utils.dart";
 import "package:twitter_clone/features/auth/controller/auth_controller.dart";
 import "package:twitter_clone/theme/pallete.dart";
 
@@ -22,11 +27,17 @@ class CreateTweetScreen extends ConsumerStatefulWidget {
 
 class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
   final TweetTextController = TextEditingController();
+  List<File> fileImages = [];
 
   @override
   void dispose() {
     TweetTextController.dispose();
     super.dispose();
+  }
+
+  void onPickImages() async {
+    fileImages = await pickImages();
+    setState(() {});
   }
 
   @override
@@ -74,7 +85,20 @@ class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    if (fileImages.isNotEmpty)
+                      CarouselSlider(
+                          items: fileImages.map(
+                            (file) {
+                              return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: Image.file(File(file.path)));
+                            },
+                          ).toList(),
+                          options: CarouselOptions(
+                              height: 400, enableInfiniteScroll: false))
                   ],
                 ),
               ),
@@ -90,7 +114,9 @@ class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8).copyWith(left: 15, right: 15),
-              child: SvgPicture.asset(AssetsConstants.galleryIcon),
+              child: GestureDetector(
+                  onTap: onPickImages,
+                  child: SvgPicture.asset(AssetsConstants.galleryIcon)),
             ),
             Padding(
               padding: const EdgeInsets.all(8).copyWith(left: 15, right: 15),
