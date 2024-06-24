@@ -16,8 +16,8 @@ class UIConstants {
   }
 
   static List<Widget> bottomTapBarPages = [
-    Text("Feed Screen"), // latest tweets
-    Text("Search Screen"), // latest tweets
-    Text("Notification Screen"), // latest tweets
+    const Text("Feed Screen"), // latest tweets
+    const Text("Search Screen"), // latest tweets
+    const Text("Notification Screen"), // latest tweets
   ];
 }

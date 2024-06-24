@@ -16,9 +16,25 @@ final authControllerProvider =
   );
 });
 
+final currentUserDetailsProvider = FutureProvider((ref) {
+  final currentUserId = ref.watch(currentUserAccountProvider).value!.$id;
+  print("currentUserId: $currentUserId");
+  final userDetails = ref.watch(userDetailsProvider(currentUserId));
+  print("userDetails: $userDetails.value");
+
+  return userDetails.value;
+});
+
 final currentUserAccountProvider = FutureProvider((ref) async {
   final authController = ref.watch(authControllerProvider.notifier);
   return authController.currentUser();
+});
+
+final userDetailsProvider = FutureProvider.family((ref, String uid) {
+  final authController = ref.watch(authControllerProvider.notifier);
+  print("uid: $uid");
+  print("authController: $authController");
+  return authController.getUserData(uid);
 });
 
 // read and only provider
@@ -53,7 +69,7 @@ class AuthController extends StateNotifier<bool> {
             following: const [],
             profilePic: "",
             bannerPic: "",
-            uid: "",
+            uid: r.$id,
             bio: "",
             isTwitterBlue: false);
         final res2 = await _userApi.saveUserData(userModel);
@@ -82,5 +98,12 @@ class AuthController extends StateNotifier<bool> {
         Navigator.push(context, HomeView.route());
       },
     );
+  }
+
+  Future<UserModel> getUserData(String uid) async {
+    final doc = await _userApi.getUserData(uid);
+    print(doc);
+    final updatedUser = UserModel.fromMap(doc.data);
+    return updatedUser;
   }
 }
