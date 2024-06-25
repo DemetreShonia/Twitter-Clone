@@ -5,10 +5,12 @@ import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:image_picker/image_picker.dart";
+import "package:twitter_clone/apis/tweet_api.dart";
 import "package:twitter_clone/common/common.dart";
 import "package:twitter_clone/constants/assets_constants.dart";
 import "package:twitter_clone/core/utils.dart";
 import "package:twitter_clone/features/auth/controller/auth_controller.dart";
+import "package:twitter_clone/features/tweet/controller/tweet_controller.dart";
 import "package:twitter_clone/theme/pallete.dart";
 
 class CreateTweetScreen extends ConsumerStatefulWidget {
@@ -26,12 +28,12 @@ class CreateTweetScreen extends ConsumerStatefulWidget {
 }
 
 class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
-  final TweetTextController = TextEditingController();
+  final tweetTextController = TextEditingController();
   List<File> fileImages = [];
 
   @override
   void dispose() {
-    TweetTextController.dispose();
+    tweetTextController.dispose();
     super.dispose();
   }
 
@@ -40,9 +42,15 @@ class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
     setState(() {});
   }
 
+  void shareTweet() {
+    ref.read(tweetControllerProvider.notifier).shareTweet(
+        images: fileImages, text: tweetTextController.text, context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final currentUser = ref.watch(currentUserDetailsProvider).value;
+    final isLoading = ref.watch(tweetControllerProvider);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -53,14 +61,14 @@ class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
         ),
         actions: [
           RoundedSmallButton(
-            onTap: () {},
+            onTap: shareTweet,
             label: "Tweet",
             backgroundColor: Pallete.blueColor,
             textColor: Pallete.whiteColor,
           ),
         ],
       ),
-      body: currentUser == null
+      body: isLoading || currentUser == null
           ? const LoadingPage()
           : SafeArea(
               child: SingleChildScrollView(
@@ -75,7 +83,7 @@ class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
                         const SizedBox(width: 15),
                         Expanded(
                           child: TextField(
-                            controller: TweetTextController,
+                            controller: tweetTextController,
                             style: const TextStyle(fontSize: 22),
                             decoration: const InputDecoration(
                                 hintText: "What's happening?",
