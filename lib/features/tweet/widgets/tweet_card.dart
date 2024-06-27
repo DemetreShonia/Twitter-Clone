@@ -1,6 +1,8 @@
 import 'package:any_link_preview/any_link_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:like_button/like_button.dart';
 import 'package:twitter_clone/common/common.dart';
 import 'package:twitter_clone/constants/constants.dart';
 import 'package:twitter_clone/core/enums/tweet_type_enum.dart';
@@ -97,10 +99,33 @@ class TweetCard extends ConsumerWidget {
                                     pathName: AssetsConstants.retweetIcon,
                                     text: tweet.reshareCount.toString(),
                                     onTap: () {}),
-                                TweetIconButton(
-                                  pathName: AssetsConstants.likeOutlinedIcon,
-                                  text: tweet.likes.length.toString(),
-                                  onTap: () {},
+                                LikeButton(
+                                  size: 25,
+                                  likeBuilder: (isLiked) {
+                                    return isLiked
+                                        ? SvgPicture.asset(
+                                            AssetsConstants.likeFilledIcon,
+                                            color: Pallete.redColor,
+                                          )
+                                        : SvgPicture.asset(
+                                            AssetsConstants.likeOutlinedIcon,
+                                            color: Pallete.greyColor,
+                                          );
+                                  },
+                                  likeCount: tweet.likes.length,
+                                  countBuilder: (likeCount, isLiked, text) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(left: 2.0),
+                                      child: Text(
+                                        text,
+                                        style: TextStyle(
+                                          color: isLiked
+                                              ? Pallete.redColor
+                                              : Pallete.whiteColor,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 IconButton(
                                   onPressed: () {},
