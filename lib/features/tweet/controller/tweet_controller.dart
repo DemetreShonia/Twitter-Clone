@@ -8,6 +8,7 @@ import 'package:twitter_clone/core/enums/tweet_type_enum.dart';
 import 'package:twitter_clone/core/utils.dart';
 import 'package:twitter_clone/features/auth/controller/auth_controller.dart';
 import 'package:twitter_clone/models/tweet_model.dart';
+import 'package:twitter_clone/models/user_model.dart';
 
 final tweetControllerProvider =
     StateNotifierProvider<TweetController, bool>((ref) {
@@ -43,6 +44,27 @@ class TweetController extends StateNotifier<bool> {
   Future<List<Tweet>> getTweets() async {
     final tweetList = await _tweetAPI.getTweets();
     return tweetList.map((tweet) => Tweet.fromMap(tweet.data)).toList();
+  }
+
+// if used provider, it will throw error, so just pass user here
+  void likeTweet(Tweet tweet, UserModel user) async {
+    List<String> likes = tweet.likes;
+
+// so it has already liked and we want to remove like
+    if (tweet.likes.contains(user.uid)) {
+      likes.remove(user.uid);
+    } else {
+      likes.add(user.uid);
+    }
+
+    tweet = tweet.copyWith(
+        likes:
+            likes); // modify it, we could use .add for this case, but it is immutable so use copyWith
+    final res = await _tweetAPI.likeTweet(tweet);
+    res.fold((l) => null, (r) => null); // We do not get any error
+    // or any success message after liking.
+    // we do not use state = false or something here too
+    // since we should not hhave loading screen or smth here
   }
 
   void shareTweet(
