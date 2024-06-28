@@ -26,6 +26,8 @@ class TweetList extends ConsumerWidget {
                   } else if (data.events.contains(
                     'databases.*.collections.${AppwriteConstants.tweetsCollection}.documents.*.update',
                   )) {
+                    // some shitty logic to get INDEX OF NEWLY ADDED, search in string for id...
+
                     // get id of tweet, remove it
                     // place new tweet there, it is update!
                     final startingPoint =
@@ -40,7 +42,7 @@ class TweetList extends ConsumerWidget {
                     var tweet =
                         tweets.where((element) => element.id == tweetId).first;
                     final tweetIndex = tweets.indexOf(tweet);
-                    tweets.removeWhere((e) => e.id == tweetIndex);
+                    tweets.removeWhere((e) => e.id == tweet.id);
                     tweet = Tweet.fromMap(data.payload);
                     tweets.insert(tweetIndex, tweet);
                   }
