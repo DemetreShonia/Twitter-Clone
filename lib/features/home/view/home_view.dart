@@ -34,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar,
+      appBar: _page == 0 ? appbar : null,
       body: IndexedStack(index: _page, children: UIConstants.bottomTapBarPages),
       floatingActionButton: FloatingActionButton(
         onPressed: onCreateTweet,
