@@ -67,12 +67,12 @@ class UserProfileController extends StateNotifier<bool> {
       );
     }
 
-    // final res = await _userAPI.updateUserData(userModel);
-    // state = false;
-    // res.fold(
-    //   (l) => showSnackBar(context, l.message),
-    //   (r) => Navigator.pop(context),
-    // );
+    final res = await _userAPI.updateUserData(userModel);
+    state = false;
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => Navigator.pop(context),
+    );
   }
 
   void followUser({

@@ -2,6 +2,7 @@ import 'package:appwrite/models.dart';
 import "dart:io" as io;
 
 import 'package:flutter/material.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:image_picker/image_picker.dart';
 
 void showSnackBar(BuildContext context, String message) {
@@ -24,4 +25,15 @@ Future<List<io.File>> pickImages() async {
   }
 
   return images;
+}
+
+Future<io.File?> pickImage() async {
+  final imagePicker = ImagePicker();
+  final imageFile =
+      await imagePicker.pickImage(source: ImageSource.gallery); // or camera ;)
+
+  if (imageFile != null) {
+    return io.File(imageFile.path);
+  }
+  return null;
 }

@@ -7,6 +7,7 @@ import 'package:twitter_clone/features/auth/controller/auth_controller.dart';
 import 'package:twitter_clone/features/tweet/controller/tweet_controller.dart';
 import 'package:twitter_clone/features/tweet/widgets/tweet_card.dart';
 import 'package:twitter_clone/features/user_profile/controller/user_profile_controller.dart';
+import 'package:twitter_clone/features/user_profile/view/edit_profile_view.dart';
 import 'package:twitter_clone/features/user_profile/widgets/follow_count.dart';
 import 'package:twitter_clone/models/tweet_model.dart';
 import 'package:twitter_clone/models/user_model.dart';
@@ -55,7 +56,11 @@ class UserProfile extends ConsumerWidget {
                                       color: Pallete.whiteColor, width: 1.5)),
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 25)),
-                          onPressed: () {},
+                          onPressed: () {
+                            if (currentUser.uid == user.uid) {
+                              Navigator.push(context, EditProfileView.route());
+                            }
+                          },
                           child: Text(
                             currentUser.uid == user.uid
                                 ? "Edit Profile"
