@@ -1,16 +1,15 @@
-# twitter_clone
+# 🐦 Twitter Clone - Flutter Edition
 
-A new Flutter project.
+A fully functional **Twitter Clone** built using **Flutter** and **Appwrite**, showcasing a clean, modern, and performant mobile UI. This project replicates key features of Twitter, allowing users to tweet, retweet, like, follow, and engage with other users in real-time.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## 📱 Features
 
-A few resources to get you started if this is your first Flutter project:
+- **User Authentication**: Sign up and sign in with Firebase Authentication.
+- **Tweet, Like, and Retweet**: Users can create new tweets, like others' tweets, and retweet content.
+- **Follow System**: Users can follow and unfollow each other.
+- **Real-time Feed**: See a live feed of tweets from the people you follow.
+- **Profile Management**: Update profile details like username, bio, and profile picture.
+- **Image Support**: Users can upload images with their tweets.
+- **Responsive Design**: The app supports both mobile and web versions.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
