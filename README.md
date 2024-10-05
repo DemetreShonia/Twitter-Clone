@@ -15,7 +15,7 @@ A fully functional **Twitter Clone** built using **Flutter**, **Riverpod** and *
 
 
 ## 📷 Sneaky Pics
-Thanks a lot  [@RivaanRanawat](https://www.youtube.com/@RivaanRanawat) on YT for this amazing possibility. This project was very tough but I have learnt a lot from it, especially when it comes to clean architecture using riverpod in flutter!
+Thanks a lot  [@RivaanRanawat](https://www.youtube.com/@RivaanRanawat) on YT for this amazing opportunity. This project was challenging and complex, packed with many features. However, I learned a great deal, particularly about clean architecture using Riverpod in Flutter!
 ![image](https://github.com/user-attachments/assets/3b8ff546-8e7c-4849-a2af-40226cc9c8e3)
 
 
