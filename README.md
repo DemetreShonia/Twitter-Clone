@@ -14,7 +14,7 @@ A fully functional **Twitter Clone** built using **Flutter**, **Riverpod** and *
 - **Responsive Design**: The app supports both mobile and web versions.
 
 
-## 🥇 Honorable Mention 
+## 🥇 Honourable Mention 
 Thanks a lot  [@RivaanRanawat](https://www.youtube.com/@RivaanRanawat) on YT for this amazing opportunity. This project was challenging and complex, packed with many features. However, I learned a great deal, particularly about clean architecture using Riverpod in Flutter!
 ![image](https://github.com/user-attachments/assets/3b8ff546-8e7c-4849-a2af-40226cc9c8e3)
 
