@@ -14,6 +14,6 @@ A fully functional **Twitter Clone** built using **Flutter** and **Appwrite**, s
 - **Responsive Design**: The app supports both mobile and web versions.
 
 
-## 📝 Clean code tips
-I’ve written a 10-page guide on clean code architecture tips for Flutter, which you can view here. It covers topics like UI/Controller/API, as well as MVC and MVVM architectures. **Note:** it is unfortunatelly in georgian language and might not be useful for everyone but there is a lot to learn from it! [Flutter Clean Architecture Tips.pdf](https://github.com/user-attachments/files/17265850/Flutter.Clean.Architecture.Tips.pdf)
+## 📝 Clean Code Tips
+I’ve written a 10-page guide on clean code architecture tips for Flutter, which you can view here. [Flutter Clean Architecture Tips.pdf](https://github.com/user-attachments/files/17265850/Flutter.Clean.Architecture.Tips.pdf). It covers topics like UI/Controller/API, as well as MVC and MVVM architectures. **Note:** it is unfortunatelly in georgian language and might not be useful for everyone but there is a lot to learn from it! 
 
